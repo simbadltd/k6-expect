@@ -27,7 +27,7 @@ export default function () {
 For more information, check this [example](examples/example.ts).
 
 ### Typescript integration
-Based on this template: [k6-template-typescript](https://github.com/grafana/k6-template-typescript).
+Based on [k6-template-typescript](https://github.com/grafana/k6-template-typescript).
 
 `package.json`:
 ```json
