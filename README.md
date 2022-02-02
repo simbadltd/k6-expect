@@ -38,6 +38,8 @@ Output:
        ✓ Company contains 'LLC'
 ```
 
+For more information, check this [examples](examples).
+
 ### Pass custom context
 ``` typescript
 export class FooContext implements TestSuiteContext {
@@ -65,8 +67,6 @@ export default function () {
     }, fooContext);
 }
 ```
-
-For more information, check this [examples](examples).
 
 ### Typescript integration
 Based on [k6-template-typescript](https://github.com/grafana/k6-template-typescript).
