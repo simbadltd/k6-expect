@@ -13,7 +13,7 @@ export default function () {
         // ... for k6 http response 
         t.ensure(response(r, x => x.ok(), x => x.validJson()));
         
-        // ... for primitives parameters
+        // ... for primitives
         t.expect(
             "Application version",
             bool(r.json("isAllowed"), x => x.toBeTruthy("allowed", "disallowed"))
