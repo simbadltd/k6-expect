@@ -1,8 +1,8 @@
 import * as http from "k6/http";
-import { response } from "../src/response";
+import { response } from "../src";
 import { describe } from "../src";
-import { num } from "../src/num";
-import { str } from "../src/str";
+import { num } from "../src";
+import { str } from "../src";
 
 export default function () {
   describe("User check", t => {
