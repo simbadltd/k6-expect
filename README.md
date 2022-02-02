@@ -10,21 +10,32 @@ k6 library that simplifies writing tests in a functional way by providing a simp
 ``` typescript
 export default function () {
     describe("Check", t => {
-        const r = http.post("http://127.0.0.1:8080/foo", "{}");
+        const r = http.get("https://jsonplaceholder.typicode.com/users/10");
         
         // specialized and type-safe assertions 
         // ... for k6 http response 
         t.expect(response(r, x => x.ok(), x => x.validJson()));
         
-        // ... for primitives
-        t.expect(
-            "Application version",
-            bool(r.json("isAllowed"), x => x.toBeTruthy("allowed", "disallowed"))
-        );
-        
-        t.expect("Token", str(r, x => x.not().toBeEmpty()));
+        // ... for primitives~~~~
+        t.expect("Id", num(r.json("id"), x => x.toEqual(10)));
+        t.expect("Name", str(r.json("name"), x => x.not().toBeEmpty()));
+        t.expect("Phone number", str(r.json("phone"), x => x.regex("\\d{3}-\\d{3}-\\d{4}")));
+        t.expect("Geolocation", num(r.json("address.geo.lat"), x => x.lessThan(0)));
+        t.expect("Company", str(r.json("company.name"), x => x.toContain("LLC")));
     });
 }
+```
+
+Output:
+```console
+     █ User check
+       ✓ https://jsonplaceholder.typicode.com/users/10 is 200
+       ✓ https://jsonplaceholder.typicode.com/users/10 responded with valid json
+       ✓ Id is 10
+       ✓ Name is not empty
+       ✓ Phone number matches '\d{3}-\d{3}-\d{4}' pattern
+       ✓ Geolocation is less than} 0
+       ✓ Company contains 'LLC'
 ```
 
 ### Pass custom context

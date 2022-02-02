@@ -58,7 +58,7 @@ abstract class BoundaryAssertion implements Assertion {
     return {
       valid,
       message: valid
-        ? `${param(this._parameterName)} ${is(this._not)} ${condition}} ${this._boundary}`
+        ? `${param(this._parameterName)} ${is(this._not)} ${condition} ${this._boundary}`
         : `${param(this._parameterName)} is ${this._actual}. Expected: ${negateIf(condition, this._not)}} ${
             this._boundary
           }`
