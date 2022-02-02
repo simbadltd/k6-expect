@@ -1,7 +1,6 @@
 ﻿import { Assertion, AssertionBuilder, AssertionResult, TestSuiteContext } from "./assertion";
 import { BaseAssertionBuilder, EqualAssertion } from "./generic";
 
-
 class CollectionEmptyAssertion<T> implements Assertion {
   private readonly _actual: T[];
   private readonly _parameterName?: string;
@@ -27,8 +26,8 @@ class CollectionEmptyAssertion<T> implements Assertion {
           ? `${this._parameterName} is ${expected}`
           : `${expected}`
         : this._parameterName
-          ? `${this._parameterName} is expected to be ${expected}`
-          : `Expected to be ${expected}`
+        ? `${this._parameterName} is expected to be ${expected}`
+        : `Expected to be ${expected}`
     };
   }
 }
@@ -60,8 +59,8 @@ class CollectionContainsAssertion<T> implements Assertion {
           ? `${this._parameterName} ${condition} ${this._arg}`
           : `${condition} ${this._arg}`
         : this._parameterName
-          ? `${this._parameterName} is expected to ${condition} ${this._arg}`
-          : `Expected to ${condition} ${this._arg}`
+        ? `${this._parameterName} is expected to ${condition} ${this._arg}`
+        : `Expected to ${condition} ${this._arg}`
     };
   }
 }
@@ -76,24 +75,36 @@ export class CollectionAssertionBuilder<T> extends BaseAssertionBuilder<Array<T>
     this._factory = factory;
   }
 
+  /**
+   * Check array for emptiness
+   */
   toBeEmpty(): Assertion {
     return new CollectionEmptyAssertion(this._actual, this._not, this._parameterName);
   }
 
+  /**
+   * Check array for length
+   */
   length(count: number) {
     return new EqualAssertion(count, this._actual?.length, this._not, this._parameterName);
   }
 
+  /**
+   * Check array for occurence of an item
+   */
   toContain(arg: T) {
     return new CollectionContainsAssertion(arg, this._actual, this._not, this._parameterName);
   }
 
+  /**
+   * Negation
+   */
   not(): CollectionAssertionBuilder<T> {
     this._not = !this._not;
     return this;
   }
 
-  build(context: TestSuiteContext, parameterName?: string): Assertion {
+  build<TContext extends TestSuiteContext>(context?: TContext, parameterName?: string): Assertion {
     this._parameterName = parameterName;
     return this._factory(this);
   }

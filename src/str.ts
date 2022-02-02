@@ -24,9 +24,9 @@ export class EmptyStrAssertion implements Assertion {
 
     return {
       valid,
-      message: valid ?
-        `${param(this._parameterName)} ${is(this._not)} empty` :
-        `${param(this._parameterName)} is expected to be ${negateIf("empty", this._not)}`
+      message: valid
+        ? `${param(this._parameterName)} ${is(this._not)} empty`
+        : `${param(this._parameterName)} is expected to be ${negateIf("empty", this._not)}`
     };
   }
 }
@@ -50,8 +50,9 @@ export class RegexAssertion implements Assertion {
 
     return {
       valid,
-      message:
-        `${param(this._parameterName)} ${does("matches", "match", this._not && valid)} '${this._pattern}' pattern`
+      message: `${param(this._parameterName)} ${does("matches", "match", this._not && valid)} '${
+        this._pattern
+      }' pattern`
     };
   }
 }
@@ -81,8 +82,8 @@ export class ContainsAssertion implements Assertion {
           ? `${this._parameterName} ${condition} '${this._substr}'`
           : `${condition} '${this._substr}'`
         : this._parameterName
-          ? `${this._parameterName} is expected to ${condition} '${this._substr}'`
-          : `Expected to ${condition} '${this._substr}'`
+        ? `${this._parameterName} is expected to ${condition} '${this._substr}'`
+        : `Expected to ${condition} '${this._substr}'`
     };
   }
 }
@@ -98,21 +99,21 @@ export class StrAssertionBuilder extends BaseAssertionBuilder<string> implements
   }
 
   /**
-   *
+   * Check value for emptiness
    */
   toBeEmpty(): Assertion {
     return new EmptyStrAssertion(this._actual, this._not, this._parameterName);
   }
 
   /**
-   *
+   * Check that value matches the pattern
    */
   regex(pattern: string): Assertion {
     return new RegexAssertion(this._actual, pattern, this._not, this._parameterName);
   }
 
   /**
-   *
+   * Check value for occurence of a string
    */
   toContain(substr: string): Assertion {
     return new ContainsAssertion(substr, this._actual, this._not, this._parameterName);
@@ -126,7 +127,7 @@ export class StrAssertionBuilder extends BaseAssertionBuilder<string> implements
     return this;
   }
 
-  build(context: TestSuiteContext, parameterName?: string): Assertion {
+  build<TContext extends TestSuiteContext>(context?: TContext, parameterName?: string): Assertion {
     this._parameterName = parameterName;
     return this._factory(this);
   }

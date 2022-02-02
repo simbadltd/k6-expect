@@ -20,9 +20,9 @@ export class NilAssertion<T> implements Assertion {
 
     return {
       valid,
-      message: valid?
-        `${param(this._parameterName)} is ${negateIf("nil", this._not)}`:
-        `${param(this._parameterName)} is ${this._actual}. Expected: ${negateIf("nil", this._not)}`
+      message: valid
+        ? `${param(this._parameterName)} is ${negateIf("nil", this._not)}`
+        : `${param(this._parameterName)} is ${this._actual}. Expected: ${negateIf("nil", this._not)}`
     };
   }
 }
@@ -61,10 +61,16 @@ export class BaseAssertionBuilder<T> {
     this._not = false;
   }
 
+  /**
+   * Check value for `null` or `undefined`
+   */
   isNil(): Assertion {
     return new NilAssertion(this._actual, this._not, this._parameterName);
   }
 
+  /**
+   * Check value for equality
+   */
   toEqual(expected: T): Assertion {
     return new EqualAssertion(expected, this._actual, this._not, this._parameterName);
   }
@@ -76,16 +82,19 @@ export class GenericAssertionBuilder<T> extends BaseAssertionBuilder<T> implemen
   private readonly _factory: GenericAssertionFactory<T>;
 
   constructor(actual: T, factory: GenericAssertionFactory<T>) {
-    super(actual)
+    super(actual);
     this._factory = factory;
   }
 
+  /**
+   * Negation
+   */
   not(): GenericAssertionBuilder<T> {
     this._not = !this._not;
     return this;
   }
 
-  build(context: TestSuiteContext, parameterName?: string): Assertion {
+  build<TContext extends TestSuiteContext>(context?: TContext, parameterName?: string): Assertion {
     this._parameterName = parameterName;
     return this._factory(this);
   }

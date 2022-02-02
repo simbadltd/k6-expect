@@ -1,17 +1,17 @@
 ﻿import { check } from "k6";
 import { AssertionBuilder, TestSuiteContext } from "./assertion";
 
-export class TestSuite {
-  readonly context: TestSuiteContext;
+export class TestSuite<TContext extends TestSuiteContext> {
+  readonly context?: TContext;
 
-  constructor(context: TestSuiteContext) {
+  constructor(context?: TContext) {
     this.context = context;
   }
 
   expect(parameterName: string, assertionBuilders: AssertionBuilder[]): void {
     for (const builder of assertionBuilders) {
       const valid = this._assert(builder, parameterName);
-      if (!valid && this.context.breakOnFirstAssert) {
+      if (!valid && (!this.context || this.context?.breakOnFirstAssert)) {
         break;
       }
     }
@@ -20,7 +20,7 @@ export class TestSuite {
   ensure(assertionBuilders: AssertionBuilder[]): void {
     for (const builder of assertionBuilders) {
       const valid = this._assert(builder);
-      if (!valid && this.context.breakOnFirstAssert) {
+      if (!valid && (!this.context || this.context?.breakOnFirstAssert)) {
         break;
       }
     }

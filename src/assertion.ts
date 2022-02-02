@@ -1,5 +1,12 @@
 ﻿export interface TestSuiteContext {
+  /**
+   * Test suite run behavior. If true - test suite will break after first failed assertion.
+   */
   breakOnFirstAssert: boolean;
+
+  /**
+   * Url postprocess logic
+   */
   sanitizeUrl: (url: string) => string;
 }
 
@@ -13,10 +20,5 @@ export interface Assertion {
 }
 
 export interface AssertionBuilder {
-  build(context: TestSuiteContext, parameterName?: string): Assertion;
+  build<TContext extends TestSuiteContext>(context?: TContext, parameterName?: string): Assertion;
 }
-
-export const DEFAULT_TEST_SUITE_CONTEXT: TestSuiteContext = {
-  sanitizeUrl: url => url,
-  breakOnFirstAssert: true
-};

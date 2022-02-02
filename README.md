@@ -5,6 +5,8 @@
 k6 library that simplifies writing tests in a functional way by providing a simple and [jest](https://jestjs.io/)-like syntax for expectations.
 
 ## Usage
+
+### Get started
 ``` typescript
 export default function () {
     describe("Check", t => {
@@ -22,6 +24,32 @@ export default function () {
         
         t.expect("Token", str(r, x => x.not().toBeEmpty()));
     });
+}
+```
+
+### Pass custom context
+``` typescript
+export class FooContext implements TestSuiteContext {
+  breakOnFirstAssert: boolean;
+  
+  constructor() {
+    this.breakOnFirstAssert = true;
+  }
+
+  sanitizeUrl(url: string): string {
+    return "";
+  }
+}
+
+let fooContext = new FooContext();
+
+export default function () {
+    describe("Check", t => {
+        // Test logic
+        // ...
+        // Access to custom logic
+        t.context.customFunction();
+    }, fooContext);
 }
 ```
 

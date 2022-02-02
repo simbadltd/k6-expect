@@ -1,9 +1,13 @@
 ﻿import { check, group } from "k6";
-import { DEFAULT_TEST_SUITE_CONTEXT, TestSuiteContext } from "./assertion";
+import { TestSuiteContext } from "./assertion";
 import { TestSuite } from "./test-suite";
 
-export function describe(name: string, test: (t: TestSuite) => void, context?: TestSuiteContext) {
-  let t = new TestSuite(context ? context : DEFAULT_TEST_SUITE_CONTEXT);
+export function describe<TContext extends TestSuiteContext = TestSuiteContext>(
+  name: string,
+  test: (t: TestSuite<TContext>) => void,
+  context?: TContext
+) {
+  let t = new TestSuite<TContext>(context);
 
   let success = true;
 

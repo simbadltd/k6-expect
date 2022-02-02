@@ -25,8 +25,8 @@ export class BoolAssertion implements Assertion {
           ? `${this._parameterName} is ${this._validArm}`
           : `${this._validArm}`
         : this._parameterName
-          ? `${this._parameterName} is ${this._invalidArm}. Expected: ${this._validArm}`
-          : `${this._invalidArm}. Expected: ${this._validArm}`
+        ? `${this._parameterName} is ${this._invalidArm}. Expected: ${this._validArm}`
+        : `${this._invalidArm}. Expected: ${this._validArm}`
     };
   }
 }
@@ -38,24 +38,33 @@ export class BoolAssertionBuilder extends BaseAssertionBuilder<boolean> implemen
 
   constructor(actual: boolean, factory: BoolAssertionFactory) {
     super(actual);
-    
+
     this._factory = factory;
   }
 
+  /**
+   * Check value for truth
+   */
   toBeTruthy(valid: string = "true", invalid: string = "false"): Assertion {
     return new BoolAssertion(this._actual, false, valid, invalid, this._parameterName);
   }
 
+  /**
+   * Check value for falsity
+   */
   toBeFalsy(valid: string = "false", invalid: string = "true"): Assertion {
     return new BoolAssertion(this._actual, true, valid, invalid, this._parameterName);
   }
 
+  /**
+   * Negation
+   */
   not(): BaseAssertionBuilder<boolean> {
     this._not = !this._not;
     return this;
   }
 
-  build(context: TestSuiteContext, parameterName?: string): Assertion {
+  build<TContext extends TestSuiteContext>(context?: TContext, parameterName?: string): Assertion {
     this._parameterName = parameterName;
     return this._factory(this);
   }

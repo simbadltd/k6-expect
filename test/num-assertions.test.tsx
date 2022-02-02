@@ -1,9 +1,9 @@
 ﻿import { num } from "../src/num";
-import { AssertionBuilder, AssertionResult, DEFAULT_TEST_SUITE_CONTEXT } from "../src/assertion";
+import { AssertionBuilder, AssertionResult } from "../src/assertion";
 
 function run(builders: AssertionBuilder[]): AssertionResult {
   const builder = builders[0];
-  const assertion = builder.build(DEFAULT_TEST_SUITE_CONTEXT);
+  const assertion = builder.build();
   return assertion.check();
 }
 

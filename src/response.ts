@@ -31,7 +31,8 @@ class ValidJsonAssertion implements Assertion {
 
 export type ResponseAssertionFactory = (x: ResponseAssertionBuilder) => Assertion;
 
-export class ResponseAssertionBuilder extends BaseAssertionBuilder<RefinedResponse<ResponseType | undefined>> implements AssertionBuilder {
+export class ResponseAssertionBuilder extends BaseAssertionBuilder<RefinedResponse<ResponseType | undefined>>
+  implements AssertionBuilder {
   private readonly _factory: ResponseAssertionFactory;
   private _url: string;
 
@@ -43,21 +44,21 @@ export class ResponseAssertionBuilder extends BaseAssertionBuilder<RefinedRespon
   }
 
   /**
-   *
+   * Check that response contains valid json
    */
   validJson(): Assertion {
     return new ValidJsonAssertion(this._actual, this._not, this._url);
   }
 
   /**
-   *
+   * Check that response has successful status (200-299)
    */
   success(): Assertion {
     return new BetweenAssertion(200, 299, this._actual.status, this._not, this._url);
   }
 
   /**
-   *
+   * Check that response has status specified
    */
   status(code: number): Assertion {
     return this._ensureHttpStatusCode(code);
@@ -71,49 +72,49 @@ export class ResponseAssertionBuilder extends BaseAssertionBuilder<RefinedRespon
   }
 
   /**
-   * 
+   * Check response for `202 ACCEPTED`
    */
   accepted(): Assertion {
     return this._ensureHttpStatusCode(202);
   }
 
   /**
-   *
+   * Check response for `204 NO CONTENT`
    */
   noContent(): Assertion {
     return this._ensureHttpStatusCode(204);
   }
 
   /**
-   *
+   * Check response for `400 BAD REQUEST`
    */
   badRequest(): Assertion {
     return this._ensureHttpStatusCode(400);
   }
 
   /**
-   *
+   * Check response for `401 UNAUTHORIZED`
    */
   unauthorized(): Assertion {
     return this._ensureHttpStatusCode(401);
   }
 
   /**
-   *
+   * Check response for `403 FORBIDDEN`
    */
   forbidden(): Assertion {
     return this._ensureHttpStatusCode(403);
   }
 
   /**
-   *
+   * Check response for `404 NOT FOUND`
    */
   notFound(): Assertion {
     return this._ensureHttpStatusCode(404);
   }
 
   /**
-   *
+   * Check response body length
    */
   length(count: number): Assertion {
     return new EqualAssertion(count, this._actual.body?.length, this._not, this._parameterName);
@@ -127,9 +128,9 @@ export class ResponseAssertionBuilder extends BaseAssertionBuilder<RefinedRespon
     return this;
   }
 
-  build(context: TestSuiteContext, parameterName?: string): Assertion {
+  build<TContext extends TestSuiteContext>(context?: TContext, parameterName?: string): Assertion {
     this._parameterName = parameterName;
-    this._url = context.sanitizeUrl(this._actual.request.url);
+    this._url = context ? context.sanitizeUrl(this._actual.request.url) : this._actual.request.url;
     return this._factory(this);
   }
 
