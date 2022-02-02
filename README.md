@@ -14,7 +14,7 @@ export default function () {
         
         // specialized and type-safe assertions 
         // ... for k6 http response 
-        t.ensure(response(r, x => x.ok(), x => x.validJson()));
+        t.expect(response(r, x => x.ok(), x => x.validJson()));
         
         // ... for primitives
         t.expect(

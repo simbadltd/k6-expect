@@ -20,6 +20,7 @@ export function describe<TContext extends TestSuiteContext = TestSuiteContext>(
   group(name, () => {
     try {
       test(t);
+      t.run();
       success = true;
     } catch (e) {
       success = false;
