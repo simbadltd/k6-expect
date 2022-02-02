@@ -1,7 +1,7 @@
 # k6-expect
 [![NPM](https://img.shields.io/npm/v/k6-expect.svg)](https://www.npmjs.org/package/k6-expect)
 
-k6 library that simplifies writing tests in a functional way by providing a simple and readable syntax for expectations.
+k6 library that simplifies writing tests in a functional way by providing a simple and [jest](https://jestjs.io/)-like syntax for expectations.
 
 ## Usage
 ``` typescript
@@ -13,23 +13,18 @@ export default function () {
         // ... for k6 http response 
         t.ensure(response(r, x => x.ok(), x => x.validJson()));
         
-        // ... for boolean parameters
+        // ... for primitives parameters
         t.expect(
             "Application version",
-            bool(r.json("isApplicationVersionAllowed"), x => x.truthy("allowed", "disallowed"))
+            bool(r.json("isAllowed"), x => x.toBeTruthy("allowed", "disallowed"))
         );
         
-        // ... for numbers
-        t.expect("Charged amount", num(r.json("Amount"), x=> x.greaterThanOrEql(0)));
-        
-        // ... for strings
-        t.expect("Token", str(r, x => x.isNotEmpty()));
-        
-        // ... for collections
-        t.expect("Token roles", collection(r.json("roles"), x => x.includes("editor")));
+        t.expect("Token", str(r, x => x.not().toBeEmpty()));
     });
 }
 ```
+
+For more information, check this [example](examples/example.ts).
 
 ### Typescript integration
 Based on this template: [k6-template-typescript](https://github.com/grafana/k6-template-typescript).
@@ -65,7 +60,7 @@ module.exports = {
 }
 ```
 
-## Assertion definitions table
+## Assertions table
 | Access Function | Assertion        | Supports negation | Description                                         |
 |-----------------|------------------|-------------------|-----------------------------------------------------|
 | that()          | isNil            | ✓                 | Check value for `null` or `undefined`               |
@@ -100,5 +95,5 @@ module.exports = {
 |                 | forbidden        | ✓                 | Check response for `403 FORBIDDEN`                  |
 |                 | notFound         | ✓                 | Check response for `404 NOT FOUND`                  |
 |                 | length           | ✓                 | Check response body length                          |
-~~~~~~~~
+
 ## LICENSE [MIT](LICENSE)
