@@ -66,7 +66,7 @@ export default function () {
 }
 ```
 
-For more information, check this [example](examples/example.ts).
+For more information, check this [examples](examples).
 
 ### Typescript integration
 Based on [k6-template-typescript](https://github.com/grafana/k6-template-typescript).
