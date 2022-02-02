@@ -1,0 +1,60 @@
+{
+  "name": "k6-expect",
+  "version": "0.0.1",
+  "description": "k6 library that simplifies writing tests in a functional way by providing a simple and readable syntax for expectations",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "jest --verbose",
+    "format": "./node_modules/.bin/prettier --write \"src/*.ts\"",
+    "lint": "./node_modules/.bin/eslint \"src/*.ts\"",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simbadltd/k6-expect.git"
+  },
+  "bugs": {
+    "url": "https://github.com/simbadltd/k6-expect/issues"
+  },
+  "homepage": "https://github.com/simbadltd/k6-expect",
+  "author": "Konstantin Kryzhanovskii",
+  "license": "MIT",
+  "keywords": [
+    "k6",
+    "expect",
+    "functional",
+    "test",
+    "assert",
+    "assertion",
+    "testing"
+  ],
+  "devDependencies": {
+    "@babel/core": "7.16.10",
+    "@babel/plugin-proposal-class-properties": "7.16.7",
+    "@babel/plugin-proposal-object-rest-spread": "7.16.7",
+    "@babel/preset-env": "7.16.11",
+    "@babel/preset-typescript": "7.16.7",
+    "@types/k6": "0.35.2",
+    "@types/webpack": "5.28.0",
+    "@types/jest": "^24.0.21",
+    "babel-loader": "8.2.3",
+    "clean-webpack-plugin": "4.0.0",
+    "copy-webpack-plugin": "10.2.1",
+    "typescript": "4.5.5",
+    "webpack": "5.67.0",
+    "webpack-cli": "4.9.1",
+    "webpack-glob-entries": "1.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "jest": "^24.9.0",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
+  }
+}
