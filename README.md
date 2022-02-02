@@ -61,7 +61,7 @@ let fooContext = new FooContext();
 export default function () {
     describe("Check", t => {
         // Test logic
-        // ...~~~~
+        // ...
         // Access to custom logic
         t.context!.customFunction();
     }, fooContext);
@@ -116,7 +116,7 @@ module.exports = {
 |                 | lessThanOrEql    | ✓                 | Check that value is less or equal                   |
 | str()           | toBeEmpty        | ✓                 | Check value for emptiness                           |
 |                 | regex            | ✓                 | Check that value matches the pattern                |
-|                 | toContain        | ✓                 | Check value for occurence of a string               |~~~~
+|                 | toContain        | ✓                 | Check value for occurence of a string               |
 | response()      | validJson        | ✓                 | Check that response contains valid json             |
 |                 | success          | ✓                 | Check that response has successful status (200-299) |
 |                 | status           | ✓                 | Check that response has status specified            |
