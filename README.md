@@ -34,7 +34,7 @@ Output:
        ✓ Id is 10
        ✓ Name is not empty
        ✓ Phone number matches '\d{3}-\d{3}-\d{4}' pattern
-       ✓ Geolocation is less than} 0
+       ✓ Geolocation is less than 0
        ✓ Company contains 'LLC'
 ```
 
