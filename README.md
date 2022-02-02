@@ -92,25 +92,20 @@ module.exports = {
 |-----------------|------------------|-------------------|-----------------------------------------------------|
 | that()          | isNil            | ✓                 | Check value for `null` or `undefined`               |
 |                 | eql              | ✓                 | Check value for equality                            |
-|                 |                  |                   |                                                     |
 | bool()          | toBeTruthy       | ✗                 | Check value for truth                               |
 |                 | toBeFalsy        | ✗                 | Check value for falsity                             |
-|                 |                  |                   |                                                     |
 | collection()    | toBeEmpty        | ✓                 | Check array for emptiness                           |
 |                 | length           | ✓                 | Check array for length                              |
 |                 | toContain        | ✓                 | Check array for occurence of an item                |
-|                 |                  |                   |                                                     |
 | num()           | zero             | ✓                 | Check value for zero                                |
 |                 | between          | ✓                 | Check value for a hit in the interval (inclusive)   |
 |                 | greaterThan      | ✓                 | Check that value is greater                         |
 |                 | greaterThanOrEql | ✓                 | Check that value is greater or equal                |
 |                 | lessThan         | ✓                 | Check that value is less                            |
 |                 | lessThanOrEql    | ✓                 | Check that value is less or equal                   |
-|                 |                  |                   |                                                     |
 | str()           | toBeEmpty        | ✓                 | Check value for emptiness                           |
 |                 | regex            | ✓                 | Check that value matches the pattern                |
-|                 | toContain        | ✓                 | Check value for occurence of a string               |
-|                 |                  |                   |                                                     |
+|                 | toContain        | ✓                 | Check value for occurence of a string               |~~~~
 | response()      | validJson        | ✓                 | Check that response contains valid json             |
 |                 | success          | ✓                 | Check that response has successful status (200-299) |
 |                 | status           | ✓                 | Check that response has status specified            |
