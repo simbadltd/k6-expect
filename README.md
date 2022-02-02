@@ -39,6 +39,8 @@ export class FooContext implements TestSuiteContext {
   sanitizeUrl(url: string): string {
     return "";
   }
+
+  customFunction() { /* custom logic */ }
 }
 
 let fooContext = new FooContext();
