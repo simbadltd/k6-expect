@@ -59,9 +59,9 @@ let fooContext = new FooContext();
 export default function () {
     describe("Check", t => {
         // Test logic
-        // ...
+        // ...~~~~
         // Access to custom logic
-        t.context.customFunction();
+        t.context!.customFunction();
     }, fooContext);
 }
 ```
