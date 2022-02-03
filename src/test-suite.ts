@@ -13,20 +13,15 @@ export class TestSuite<TContext extends TestSuiteContext> {
   expect(assertionBuilders: AssertionBuilder[]): TestSuite<TContext>;
   expect(parameterName: string, assertionBuilders: AssertionBuilder[]): TestSuite<TContext>;
   expect(...args: any[]): TestSuite<TContext> {
-    const hasParameterName = typeof(args[0]) == "string";
-    const assertionBuilders = hasParameterName? args[1]: args[0];
-    const parameterName = hasParameterName? args[0] : null;
-    for (const builder of assertionBuilders) {
-      this._addAssertion(builder, parameterName);
-    }
-    
+    this._addAssertions(args);
     return this;
   }
 
   and(assertionBuilders: AssertionBuilder[]): TestSuite<TContext>;
   and(parameterName: string, assertionBuilders: AssertionBuilder[]): TestSuite<TContext>;
   and(...args: any[]): TestSuite<TContext>{
-    return this.expect(args);
+    this._addAssertions(args);
+    return this;
   }
 
   run() {
@@ -40,6 +35,17 @@ export class TestSuite<TContext extends TestSuiteContext> {
         break;
       }
     }
+  }
+  
+  private _addAssertions(args: any[]){
+    const hasParameterName = typeof(args[0]) == "string";
+    const assertionBuilders = hasParameterName? args[1]: args[0];
+    const parameterName = hasParameterName? args[0] : null;
+    for (const builder of assertionBuilders) {
+      this._addAssertion(builder, parameterName);
+    }
+
+    return this;
   }
 
   private _addAssertion(builder: AssertionBuilder, parameterName?: string): void {
