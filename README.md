@@ -14,14 +14,13 @@ export default function () {
         
         // specialized and type-safe assertions 
         // ... for k6 http response 
-        t.expect(response(r, x => x.ok(), x => x.validJson()));
-        
+        t.expect(response(r, x => x.ok(), x => x.validJson()))~~~~
         // ... for primitives
-        t.expect("Id", num(r.json("id"), x => x.toEqual(10)));
-        t.expect("Name", str(r.json("name"), x => x.not().toBeEmpty()));
-        t.expect("Phone number", str(r.json("phone"), x => x.regex("\\d{3}-\\d{3}-\\d{4}")));
-        t.expect("Geolocation", num(r.json("address.geo.lat"), x => x.lessThan(0)));
-        t.expect("Company", str(r.json("company.name"), x => x.toContain("LLC")));
+          .and("Id", num(r.json("id"), x => x.toEqual(10)))
+          .and("Name", str(r.json("name"), x => x.not().toBeEmpty()))
+          .and("Phone number", str(r.json("phone"), x => x.regex("\\d{3}-\\d{3}-\\d{4}")))
+          .and("Geolocation", num(r.json("address.geo.lat"), x => x.lessThan(0)))
+          .and("Company", str(r.json("company.name"), x => x.toContain("LLC")));
     });
 }
 ```
