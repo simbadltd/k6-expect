@@ -14,7 +14,7 @@ export default function () {
         
         // specialized and type-safe assertions 
         // ... for k6 http response 
-        t.expect(response(r, x => x.ok(), x => x.validJson()))~~~~
+        t.expect(response(r, x => x.ok(), x => x.validJson()))
         // ... for primitives
           .and("Id", num(r.json("id"), x => x.toEqual(10)))
           .and("Name", str(r.json("name"), x => x.not().toBeEmpty()))
