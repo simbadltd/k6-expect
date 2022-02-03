@@ -7,6 +7,7 @@ import { num } from "./num";
 import { response } from "./response";
 import { str } from "./str";
 import { TestSuite } from "./test-suite";
+import { trace } from "./trace";
 
 export function describe<TContext extends TestSuiteContext = TestSuiteContext>(
   name: string,
@@ -42,5 +43,6 @@ export {
   bool,
   collection,
   response,
-  str
+  str,
+  trace
 }
