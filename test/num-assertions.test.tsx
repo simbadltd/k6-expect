@@ -1,4 +1,4 @@
-﻿import { num } from "../src/num";
+﻿import { num } from "../src";
 import { AssertionBuilder, AssertionResult } from "../src/assertion";
 
 function run(builders: AssertionBuilder[]): AssertionResult {
@@ -33,6 +33,30 @@ describe('Num assertions', () => {
     ["0", true]
   ])("not.zero::%s", (val, valid) => {
     const builder = num(val, x => x.not().zero());
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
+
+  test.each([
+    [0, 0, 10, true],
+    [0.000000, 0.000000, 10.000000, true],
+    [-1, 0, 10, false],
+    [11, 0, 10, false],
+    [10.000001, 0.000000, 10.000000, false]
+  ])("between::%s in [%s..%s]", (val, a, b, valid) => {
+    const builder = num(val, x => x.between(a, b));
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
+
+  test.each([
+    [0, 0, 10, false],
+    [0.000000, 0.000000, 10.000000, false],
+    [-1, 0, 10, true],
+    [11, 0, 10, true],
+    [10.000001, 0.000000, 10.000000, true]
+  ])("not.between::%s in [%s..%s]", (val, a, b, valid) => {
+    const builder = num(val, x => x.not().between(a, b));
     const result = run(builder);
     expect(result.valid).toEqual(valid);
   });

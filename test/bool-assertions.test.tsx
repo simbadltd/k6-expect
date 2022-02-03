@@ -1,4 +1,4 @@
-﻿import { bool } from "../src/bool";
+﻿import { bool } from "../src";
 import { AssertionBuilder, AssertionResult } from "../src/assertion";
 
 function run(builders: AssertionBuilder[]): AssertionResult {

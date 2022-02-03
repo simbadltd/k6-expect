@@ -1,5 +1,5 @@
 ﻿import { AssertionBuilder, AssertionResult } from "../src/assertion";
-import { collection } from "../src/collection";
+import { collection } from "../src";
 
 function run(builders: AssertionBuilder[]): AssertionResult {
   const builder = builders[0];
