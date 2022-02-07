@@ -1,7 +1,16 @@
 ﻿import { check } from "k6";
 import { Assertion, AssertionBuilder, TestSuiteContext } from "./assertion";
 
-export class BrokenTestSuiteException extends Error {
+export class BrokenTestSuiteError extends Error {
+  constructor() {
+    super();
+    this.name = this.constructor.name;
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(this, this.constructor)
+    } else {
+      this.stack = new Error().stack
+    }
+  }
 }
 
 export class TestSuite<TContext extends TestSuiteContext> {
@@ -44,7 +53,7 @@ export class TestSuite<TContext extends TestSuiteContext> {
     });
 
     if (!result.valid && (!this.context || this.context?.breakOnFirstAssert)) {
-      throw new BrokenTestSuiteException();
+      throw new BrokenTestSuiteError();
     }
   }
 }

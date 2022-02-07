@@ -6,7 +6,7 @@ import { that } from "./generic";
 import { num } from "./num";
 import { response } from "./response";
 import { str } from "./str";
-import { BrokenTestSuiteException, TestSuite } from "./test-suite";
+import { BrokenTestSuiteError, TestSuite } from "./test-suite";
 import { trace } from "./trace";
 
 export function describe<TContext extends TestSuiteContext = TestSuiteContext>(
@@ -22,11 +22,11 @@ export function describe<TContext extends TestSuiteContext = TestSuiteContext>(
     try {
       test(t);
       success = true;
-    } catch (e) {
+    } catch (e: any) {
       success = false;
-      
-      if (!(e instanceof BrokenTestSuiteException)) {
-        console.error(`Exception during test suite "${name}" run. \n${e}`);
+
+      if (e.constructor !== BrokenTestSuiteError) {
+        console.error(`Exception  during test suite "${name}" run. \n${e}`);
         check(null, {
           [`Exception raised "${e}"`]: () => false
         });
