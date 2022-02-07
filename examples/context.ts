@@ -17,6 +17,10 @@ export class FooContext implements TestSuiteContext {
   phoneNumberPattern(): string {
     return "\\d{3}-\\d{3}-\\d{4}";
   }
+
+  sanitizeCheckName(name: string): string {
+    return `UC000: ${name}`;
+  }
 }
 
 const context = new FooContext();

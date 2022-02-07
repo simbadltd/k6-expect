@@ -8,6 +8,11 @@
    * Url postprocess logic
    */
   sanitizeUrl: (url: string) => string;
+
+  /**
+   * Check name postprocess logic
+   */
+  sanitizeCheckName: (name: string) => string;
 }
 
 export interface AssertionResult {

@@ -50,8 +50,9 @@ export class TestSuite<TContext extends TestSuiteContext> {
 
   private _checkAssertion(assertion: Assertion) {
     const result = assertion.check();
+    const checkName = this.context? this.context.sanitizeCheckName(result.message) : result.message;
     check(null, {
-      [result.message]: () => result.valid
+      [checkName]: () => result.valid
     });
 
     if (!result.valid && (!this.context || this.context?.breakOnFirstAssert)) {
