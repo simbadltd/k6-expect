@@ -22,7 +22,30 @@ export class NilAssertion<T> implements Assertion {
       valid,
       message: valid
         ? `${param(this._parameterName)} is ${negateIf("nil", this._not)}`
-        : `${param(this._parameterName)} is ${this._actual}. Expected: ${negateIf("nil", this._not)}`
+        : `${param(this._parameterName)} is expected to be ${negateIf("nil", this._not)}`
+    };
+  }
+}
+
+export class NullAssertion<T> implements Assertion {
+  private readonly _actual: T;
+  private readonly _parameterName?: string;
+  private readonly _not: boolean;
+
+  constructor(actual: T, not: boolean, parameterName?: string) {
+    this._parameterName = parameterName;
+    this._actual = actual;
+    this._not = not;
+  }
+
+  check(): AssertionResult {
+    const valid = this._not ? this._actual !== null : this._actual === null;
+
+    return {
+      valid,
+      message: valid
+        ? `${param(this._parameterName)} is ${negateIf("null", this._not)}`
+        : `${param(this._parameterName)} is expected to be ${negateIf("null", this._not)}`
     };
   }
 }
@@ -64,8 +87,15 @@ export class BaseAssertionBuilder<T> {
   /**
    * Check value for `null` or `undefined`
    */
-  isNil(): Assertion {
+  nil(): Assertion {
     return new NilAssertion(this._actual, this._not, this._parameterName);
+  }
+
+  /**
+   * Check value for `null`
+   */
+  null(): Assertion {
+    return new NullAssertion(this._actual, this._not, this._parameterName);
   }
 
   /**

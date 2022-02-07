@@ -2,9 +2,11 @@
 import { Assertion, AssertionBuilder, TestSuiteContext } from "./assertion";
 
 export class BrokenTestSuiteError extends Error {
+  brokenChain: boolean;
   constructor() {
     super();
     this.name = this.constructor.name;
+    this.brokenChain = true;
     if (typeof Error.captureStackTrace === 'function') {
       Error.captureStackTrace(this, this.constructor)
     } else {

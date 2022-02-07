@@ -100,8 +100,9 @@ module.exports = {
 ## Assertions table
 | Access Function | Assertion        | Supports negation | Description                                         |
 |-----------------|------------------|-------------------|-----------------------------------------------------|
-| that()          | isNil            | ✓                 | Check value for `null` or `undefined`               |
-|                 | eql              | ✓                 | Check value for equality                            |
+| that()          | nil              | ✓                 | Check value for `null` or `undefined`               |
+|                 | null             | ✓                 | Check value for `null`                              |
+|                 | eql              | ✓                 | Check value for equality                            |~~~~~~~~
 | bool()          | toBeTruthy       | ✗                 | Check value for truth                               |
 |                 | toBeFalsy        | ✗                 | Check value for falsity                             |
 | collection()    | toBeEmpty        | ✓                 | Check array for emptiness                           |
