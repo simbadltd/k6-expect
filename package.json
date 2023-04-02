@@ -1,13 +1,13 @@
 {
   "name": "k6-expect",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "k6 library that simplifies writing tests in a functional way by providing a simple and readable syntax for expectations",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest --verbose",
     "format": "./node_modules/.bin/prettier --write \"src/*.ts\"",
-    "lint": "./node_modules/.bin/eslint \"src/*.ts\"",
+    "lint": "eslint \"src/*.ts\"",
     "build": "tsc"
   },
   "repository": {

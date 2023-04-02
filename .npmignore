@@ -9,3 +9,7 @@ test/
 tsconfig.json
 
 .vscode/
+.github/
+.prettierrc.json
+jest.config.js
+test-suite*
