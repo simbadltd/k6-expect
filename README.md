@@ -129,4 +129,5 @@ module.exports = {
 |                 | notFound         | ✓                 | Check response for `404 NOT FOUND`                  |
 |                 | length           | ✓                 | Check response body length                          |
 
-## LICENSE [MIT](LICENSE)
+## LICENSE
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.

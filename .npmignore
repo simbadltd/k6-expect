@@ -12,4 +12,3 @@ tsconfig.json
 .github/
 .prettierrc.json
 jest.config.js
-test-suite*
