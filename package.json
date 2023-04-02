@@ -1,6 +1,6 @@
 {
   "name": "k6-expect",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "k6 library that simplifies writing tests in a functional way by providing a simple and readable syntax for expectations",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
