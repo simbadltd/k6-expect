@@ -49,4 +49,17 @@ describe("Collection assertions", () => {
     const result = run(builder);
     expect(result.valid).toEqual(valid);
   });
+
+  test.each([
+    [null, true],
+    [undefined, true],
+    [1, true],
+    [[], true],
+    [["0"], false],
+    [["0", "1"], false]
+  ])("toBeEmpty::%s", (a, valid) => {
+    const builder = collection(a, x => x.toBeEmpty());
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
 });

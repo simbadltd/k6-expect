@@ -67,7 +67,9 @@ export class ContainsAssertion implements Assertion {
 
   check(): AssertionResult {
     const substr = this._substr;
-    const valid = this._not ? this._actual.indexOf(substr) < 0 : this._actual.indexOf(substr) >= 0;
+    const actual = this._actual;
+    const isNotNull = !!actual;
+    const valid = this._not ? isNotNull && actual.indexOf(substr) < 0 : isNotNull && actual.indexOf(substr) >= 0;
     const condition = this._not ? "does not contain" : "contains";
     const name = this._parameterName;
 
