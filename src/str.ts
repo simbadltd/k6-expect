@@ -41,13 +41,13 @@ export class RegexAssertion implements Assertion {
   }
 
   check(): AssertionResult {
-    const regex = new RegExp(this._pattern);
+    const pattern = this._pattern;
+    const regex = new RegExp(pattern);
     const valid = this._not ? !regex.test(this._actual) : regex.test(this._actual);
 
     return {
       valid,
-      message: `${param(this._parameterName)} ${does("matches", "match", this._not && valid)} '${this._pattern
-        }' pattern`
+      message: `${param(this._parameterName)} ${does("matches", "match", this._not && valid)} '${pattern}' pattern`
     };
   }
 }
@@ -66,19 +66,20 @@ export class ContainsAssertion implements Assertion {
   }
 
   check(): AssertionResult {
-    const valid = this._not ? this._actual.indexOf(this._substr) < 0 : this._actual.indexOf(this._substr) >= 0;
-
+    const substr = this._substr;
+    const valid = this._not ? this._actual.indexOf(substr) < 0 : this._actual.indexOf(substr) >= 0;
     const condition = this._not ? "does not contain" : "contains";
+    const name = this._parameterName;
 
     return {
       valid,
       message: valid
-        ? this._parameterName
-          ? `${this._parameterName} ${condition} '${this._substr}'`
-          : `${condition} '${this._substr}'`
-        : this._parameterName
-          ? `${this._parameterName} is expected to ${condition} '${this._substr}'`
-          : `Expected to ${condition} '${this._substr}'`
+        ? name
+          ? `${name} ${condition} '${substr}'`
+          : `${condition} '${substr}'`
+        : name
+        ? `${name} is expected to ${condition} '${substr}'`
+        : `Expected to ${condition} '${substr}'`
     };
   }
 }
