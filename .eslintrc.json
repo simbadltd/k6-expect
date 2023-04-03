@@ -10,11 +10,12 @@
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.eslint.json"
   },
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "rules": {
     "@typescript-eslint/explicit-function-return-type": [

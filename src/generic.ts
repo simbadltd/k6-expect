@@ -1,8 +1,5 @@
 ﻿import { Assertion, AssertionBuilder, AssertionResult, TestSuiteContext } from "./assertion";
-import { Msg } from "./msg";
-import negateIf = Msg.negateIf;
-import param = Msg.param;
-import is = Msg.is;
+import { negateIf, param, is } from "./msg";
 
 export class NilAssertion<T> implements Assertion {
   private readonly _actual: T;

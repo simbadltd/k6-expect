@@ -1,6 +1,9 @@
 # k6-expect
 [![NPM](https://img.shields.io/npm/v/k6-expect.svg)](https://www.npmjs.org/package/k6-expect)
+&nbsp;
 [![CI](https://github.com/simbadltd/k6-expect/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/simbadltd/k6-expect/actions/workflows/main.yml)
+&nbsp;
+<img src="./badges/coverage-jest coverage.svg">
 
 k6 library that simplifies writing tests in a functional way by providing a simple and [jest](https://jestjs.io/)-like syntax for expectations.
 

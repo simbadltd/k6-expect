@@ -7,8 +7,7 @@ function run(builders: AssertionBuilder[]): AssertionResult {
   return assertion.check();
 }
 
-describe('Generic assertions', () => {
-
+describe("Generic assertions", () => {
   test.each([
     [true, true, true],
     [false, false, true],
@@ -46,5 +45,4 @@ describe('Generic assertions', () => {
     const result = run(builder);
     expect(result.valid).toEqual(valid);
   });
-
 });

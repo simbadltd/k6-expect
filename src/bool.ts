@@ -45,14 +45,14 @@ export class BoolAssertionBuilder extends BaseAssertionBuilder<boolean> implemen
   /**
    * Check value for truth
    */
-  toBeTruthy(valid: string = "true", invalid: string = "false"): Assertion {
+  toBeTruthy(valid = "true", invalid = "false"): Assertion {
     return new BoolAssertion(this._actual, false, valid, invalid, this._parameterName);
   }
 
   /**
    * Check value for falsity
    */
-  toBeFalsy(valid: string = "false", invalid: string = "true"): Assertion {
+  toBeFalsy(valid = "false", invalid = "true"): Assertion {
     return new BoolAssertion(this._actual, true, valid, invalid, this._parameterName);
   }
 

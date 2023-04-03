@@ -7,8 +7,7 @@ function run(builders: AssertionBuilder[]): AssertionResult {
   return assertion.check();
 }
 
-describe('Bool assertions', () => {
-
+describe("Bool assertions", () => {
   test.each([
     [true, true],
     [false, false]
@@ -32,7 +31,7 @@ describe('Bool assertions', () => {
     [true, false, false],
     [false, false, true],
     [false, true, false]
-  ])("toEqual::%s === %s", (a,b,  valid) => {
+  ])("toEqual::%s === %s", (a, b, valid) => {
     const builder = bool(a, x => x.toEqual(b));
     const result = run(builder);
     expect(result.valid).toEqual(valid);
@@ -43,10 +42,9 @@ describe('Bool assertions', () => {
     [true, false, true],
     [false, false, false],
     [false, true, true]
-  ])("not::toEqual::%s !== %s", (a,b,  valid) => {
+  ])("not::toEqual::%s !== %s", (a, b, valid) => {
     const builder = bool(a, x => x.not().toEqual(b));
     const result = run(builder);
     expect(result.valid).toEqual(valid);
   });
-
 });

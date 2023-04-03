@@ -7,10 +7,10 @@ export class BrokenTestSuiteError extends Error {
     super();
     this.name = this.constructor.name;
     this.brokenChain = true;
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, this.constructor)
+    if (typeof Error.captureStackTrace === "function") {
+      Error.captureStackTrace(this, this.constructor);
     } else {
-      this.stack = new Error().stack
+      this.stack = new Error().stack;
     }
   }
 }
@@ -36,8 +36,8 @@ export class TestSuite<TContext extends TestSuiteContext> {
     return this;
   }
 
-  private _checkAssertions(args: any[]) {
-    const hasParameterName = typeof (args[0]) == "string";
+  private _checkAssertions(args: any[]): TestSuite<TContext> {
+    const hasParameterName = typeof args[0] == "string";
     const assertionBuilders: AssertionBuilder[] = hasParameterName ? args[1] : args[0];
     const parameterName = hasParameterName ? args[0] : null;
     for (const builder of assertionBuilders) {
@@ -48,9 +48,9 @@ export class TestSuite<TContext extends TestSuiteContext> {
     return this;
   }
 
-  private _checkAssertion(assertion: Assertion) {
+  private _checkAssertion(assertion: Assertion): void {
     const result = assertion.check();
-    const checkName = this.context? this.context.sanitizeCheckName(result.message) : result.message;
+    const checkName = this.context ? this.context.sanitizeCheckName(result.message) : result.message;
     check(null, {
       [checkName]: () => result.valid
     });

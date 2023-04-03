@@ -85,14 +85,14 @@ export class CollectionAssertionBuilder<T> extends BaseAssertionBuilder<Array<T>
   /**
    * Check array for length
    */
-  length(count: number) {
+  length(count: number): EqualAssertion<number> {
     return new EqualAssertion(count, this._actual?.length, this._not, this._parameterName);
   }
 
   /**
    * Check array for occurence of an item
    */
-  toContain(arg: T) {
+  toContain(arg: T): CollectionContainsAssertion<T> {
     return new CollectionContainsAssertion(arg, this._actual, this._not, this._parameterName);
   }
 

@@ -7,12 +7,11 @@ function run(builders: AssertionBuilder[]): AssertionResult {
   return assertion.check();
 }
 
-describe('Num assertions', () => {
-
+describe("Num assertions", () => {
   test.each([
     [0, true],
     [0.0, true],
-    [0.000000, true],
+    [0.0, true],
     [1, false],
     [0.1, false],
     [0.000001, false],
@@ -26,7 +25,7 @@ describe('Num assertions', () => {
   test.each([
     [0, false],
     [0.0, false],
-    [0.000000, false],
+    [0.0, false],
     [1, true],
     [0.1, true],
     [0.000001, true],
@@ -39,10 +38,10 @@ describe('Num assertions', () => {
 
   test.each([
     [0, 0, 10, true],
-    [0.000000, 0.000000, 10.000000, true],
+    [0.0, 0.0, 10.0, true],
     [-1, 0, 10, false],
     [11, 0, 10, false],
-    [10.000001, 0.000000, 10.000000, false]
+    [10.000001, 0.0, 10.0, false]
   ])("between::%s in [%s..%s]", (val, a, b, valid) => {
     const builder = num(val, x => x.between(a, b));
     const result = run(builder);
@@ -51,14 +50,13 @@ describe('Num assertions', () => {
 
   test.each([
     [0, 0, 10, false],
-    [0.000000, 0.000000, 10.000000, false],
+    [0.0, 0.0, 10.0, false],
     [-1, 0, 10, true],
     [11, 0, 10, true],
-    [10.000001, 0.000000, 10.000000, true]
+    [10.000001, 0.0, 10.0, true]
   ])("not.between::%s in [%s..%s]", (val, a, b, valid) => {
     const builder = num(val, x => x.not().between(a, b));
     const result = run(builder);
     expect(result.valid).toEqual(valid);
   });
-
 });

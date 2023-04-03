@@ -1,9 +1,6 @@
 ﻿import { Assertion, AssertionBuilder, AssertionResult, TestSuiteContext } from "./assertion";
 import { BaseAssertionBuilder, EqualAssertion } from "./generic";
-import { Msg } from "./msg";
-import negateIf = Msg.negateIf;
-import param = Msg.param;
-import is = Msg.is;
+import { negateIf, param, is } from "./msg";
 
 export class BetweenAssertion implements Assertion {
   private readonly _actual: number;
@@ -29,7 +26,7 @@ export class BetweenAssertion implements Assertion {
     return {
       valid,
       message: valid
-        ? `${param(this._parameterName)} ${Msg.is(this._not)} between ${fromTo}`
+        ? `${param(this._parameterName)} ${is(this._not)} between ${fromTo}`
         : `${param(this._parameterName)} is ${this._actual}. Expected: ${negateIf("between", this._not)} ${fromTo}`
     };
   }

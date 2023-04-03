@@ -1,10 +1,6 @@
 ﻿import { Assertion, AssertionBuilder, AssertionResult, TestSuiteContext } from "./assertion";
 import { BaseAssertionBuilder } from "./generic";
-import { Msg } from "./msg";
-import negateIf = Msg.negateIf;
-import param = Msg.param;
-import is = Msg.is;
-import does = Msg.does;
+import { negateIf, param, is, does } from "./msg";
 
 export class EmptyStrAssertion implements Assertion {
   private readonly _actual: string;
@@ -50,9 +46,8 @@ export class RegexAssertion implements Assertion {
 
     return {
       valid,
-      message: `${param(this._parameterName)} ${does("matches", "match", this._not && valid)} '${
-        this._pattern
-      }' pattern`
+      message: `${param(this._parameterName)} ${does("matches", "match", this._not && valid)} '${this._pattern
+        }' pattern`
     };
   }
 }
@@ -82,8 +77,8 @@ export class ContainsAssertion implements Assertion {
           ? `${this._parameterName} ${condition} '${this._substr}'`
           : `${condition} '${this._substr}'`
         : this._parameterName
-        ? `${this._parameterName} is expected to ${condition} '${this._substr}'`
-        : `Expected to ${condition} '${this._substr}'`
+          ? `${this._parameterName} is expected to ${condition} '${this._substr}'`
+          : `Expected to ${condition} '${this._substr}'`
     };
   }
 }
