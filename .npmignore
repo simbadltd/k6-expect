@@ -10,5 +10,7 @@ tsconfig.json
 
 .vscode/
 .github/
+coverage/
+badges/
 .prettierrc.json
 jest.config.js
