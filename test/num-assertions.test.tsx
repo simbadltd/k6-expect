@@ -59,4 +59,56 @@ describe("Num assertions", () => {
     const result = run(builder);
     expect(result.valid).toEqual(valid);
   });
+
+  test.each([
+    [null, 0.000001, false],
+    [undefined, 0.000001, false],
+    [0, 0.000001, false],
+    [0.000001, -1, true],
+    [10.000001, 10.0, true]
+  ])("greaterThan::%s > %s", (val, boundary, valid) => {
+    const builder = num(val, x => x.greaterThan(boundary));
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
+
+  test.each([
+    [null, 0.000001, false],
+    [undefined, 0.000001, false],
+    [0, 0.000001, false],
+    [0.000001, -1, true],
+    [-1, -1, true],
+    [10.000001, 10.0, true],
+    [10, 10.0, true]
+  ])("greaterThanOrEqual::%s >= %s", (val, boundary, valid) => {
+    const builder = num(val, x => x.greaterThanOrEqual(boundary));
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
+
+  test.each([
+    [null, 0.000001, true],
+    [undefined, 0.000001, false],
+    [0.000001, 0, false],
+    [-0.000001, 0, true],
+    [10.0, 10.000001, true]
+  ])("lessThan::%s < %s", (val, boundary, valid) => {
+    const builder = num(val, x => x.lessThan(boundary));
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
+
+  test.each([
+    [null, 0.000001, true],
+    [undefined, 0.000001, false],
+    [0.000001, 0, false],
+    [-1, 0.000001, true],
+    [-1, -1, true],
+    [10.0, 10.000001, true],
+    [10, 10.0, true]
+  ])("lessThanOrEqual::%s <= %s", (val, boundary, valid) => {
+    const builder = num(val, x => x.lessThanOrEqual(boundary));
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
 });

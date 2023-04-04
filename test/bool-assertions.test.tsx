@@ -42,7 +42,7 @@ describe("Bool assertions", () => {
     [true, false, true],
     [false, false, false],
     [false, true, true]
-  ])("not::toEqual::%s !== %s", (a, b, valid) => {
+  ])("not.toEqual::%s !== %s", (a, b, valid) => {
     const builder = bool(a, x => x.not().toEqual(b));
     const result = run(builder);
     expect(result.valid).toEqual(valid);

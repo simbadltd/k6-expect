@@ -47,4 +47,16 @@ describe("Str assertions", () => {
     const result = run(builder);
     expect(result.valid).toEqual(valid);
   });
+
+  test.each([
+    [null, "", false],
+    [undefined, "", false],
+    ["Dolar", "A", true],
+    ["", "", false],
+    ["Lorem ipsum", "em ip", false]
+  ])("not.toContain::%s (%s)", (val, substr, valid) => {
+    const builder = str(val, x => x.not().toContain(substr));
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
 });
