@@ -5,7 +5,7 @@
 &nbsp;
 <img src="./badges/coverage-jest coverage.svg">
 
-k6 library that simplifies writing tests in a functional way by providing a simple and [jest](https://jestjs.io/)-like syntax for expectations.
+k6 library that simplifies writing tests in functional way by providing a simple and [jest](https://jestjs.io/)-like syntax for expectations.
 
 ## Usage
 
@@ -87,7 +87,7 @@ Based on [k6-template-typescript](https://github.com/grafana/k6-template-typescr
 ```javascript
 ...
 module.exports = {
-  ...
+  // ...
     externals: [
         function ({context, request}, c) {
             if (request.startsWith('k6') || request.startsWith('https://')) {
@@ -96,41 +96,41 @@ module.exports = {
             return c();
         },
     ],
-  ...
+  // ...
 }
 ```
 
 ## Assertions table
-| Access Function | Assertion        | Supports negation | Description                                         |
-|-----------------|------------------|-------------------|-----------------------------------------------------|
-| that()          | nil              | ✓                 | Check value for `null` or `undefined`               |
-|                 | null             | ✓                 | Check value for `null`                              |
-|                 | eql              | ✓                 | Check value for equality                            |~~~~~~~~
-| bool()          | toBeTruthy       | ✗                 | Check value for truth                               |
-|                 | toBeFalsy        | ✗                 | Check value for falsity                             |
-| collection()    | toBeEmpty        | ✓                 | Check array for emptiness                           |
-|                 | length           | ✓                 | Check array for length                              |
-|                 | toContain        | ✓                 | Check array for occurence of an item                |
-| num()           | zero             | ✓                 | Check value for zero                                |
-|                 | between          | ✓                 | Check value for a hit in the interval (inclusive)   |
-|                 | greaterThan      | ✓                 | Check that value is greater                         |
-|                 | greaterThanOrEql | ✓                 | Check that value is greater or equal                |
-|                 | lessThan         | ✓                 | Check that value is less                            |
-|                 | lessThanOrEql    | ✓                 | Check that value is less or equal                   |
-| str()           | toBeEmpty        | ✓                 | Check value for emptiness                           |
-|                 | regex            | ✓                 | Check that value matches the pattern                |
-|                 | toContain        | ✓                 | Check value for occurence of a string               |
-| response()      | validJson        | ✓                 | Check that response contains valid json             |
-|                 | success          | ✓                 | Check that response has successful status (200-299) |
-|                 | status           | ✓                 | Check that response has status specified            |
-|                 | ok               | ✓                 | Check response for `200 OK`                         |
-|                 | accepted         | ✓                 | Check response for `202 ACCEPTED`                   |
-|                 | noContent        | ✓                 | Check response for `204 NO CONTENT`                 |
-|                 | badRequest       | ✓                 | Check response for `400 BAD REQUEST`                |
-|                 | unauthorized     | ✓                 | Check response for `401 UNAUTHORIZED`               |
-|                 | forbidden        | ✓                 | Check response for `403 FORBIDDEN`                  |
-|                 | notFound         | ✓                 | Check response for `404 NOT FOUND`                  |
-|                 | length           | ✓                 | Check response body length                          |
+| Access Function | Assertion          | Supports negation | Description                                         |
+|-----------------|--------------------|-------------------|-----------------------------------------------------|
+| that()          | nil                | ✓                 | Check value for `null` or `undefined`               |
+|                 | null               | ✓                 | Check value for `null`                              |
+|                 | toEqual            | ✓                 | Check value for equality                            |
+| bool()          | toBeTruthy         | ✗                 | Check value for truth                               |
+|                 | toBeFalsy          | ✗                 | Check value for falsity                             |
+| collection()    | toBeEmpty          | ✓                 | Check array for emptiness                           |
+|                 | length             | ✓                 | Check array for length                              |
+|                 | toContain          | ✓                 | Check array for occurence of an item                |
+| num()           | zero               | ✓                 | Check value for zero                                |
+|                 | between            | ✓                 | Check value for a hit in the interval (inclusive)   |
+|                 | greaterThan        | ✓                 | Check that value is greater                         |
+|                 | greaterThanOrEqual | ✓                 | Check that value is greater or equal                |
+|                 | lessThan           | ✓                 | Check that value is less                            |
+|                 | lessThanOrEqual    | ✓                 | Check that value is less or equal                   |
+| str()           | toBeEmpty          | ✓                 | Check value for emptiness                           |
+|                 | regex              | ✓                 | Check that value matches the pattern                |
+|                 | toContain          | ✓                 | Check value for occurence of a string               |
+| response()      | validJson          | ✓                 | Check that response contains valid json             |
+|                 | success            | ✓                 | Check that response has successful status (200-299) |
+|                 | status             | ✓                 | Check that response has status specified            |
+|                 | ok                 | ✓                 | Check response for `200 OK`                         |
+|                 | accepted           | ✓                 | Check response for `202 ACCEPTED`                   |
+|                 | noContent          | ✓                 | Check response for `204 NO CONTENT`                 |
+|                 | badRequest         | ✓                 | Check response for `400 BAD REQUEST`                |
+|                 | unauthorized       | ✓                 | Check response for `401 UNAUTHORIZED`               |
+|                 | forbidden          | ✓                 | Check response for `403 FORBIDDEN`                  |
+|                 | notFound           | ✓                 | Check response for `404 NOT FOUND`                  |
+|                 | length             | ✓                 | Check response body length                          |
 
 ## LICENSE
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.

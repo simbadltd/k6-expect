@@ -45,4 +45,28 @@ describe("Generic assertions", () => {
     const result = run(builder);
     expect(result.valid).toEqual(valid);
   });
+
+  test.each([
+    [null, true],
+    [undefined, true],
+    ["A", false],
+    [1, false],
+    [0, false]
+  ])("nil::%s", (value, valid) => {
+    const builder = that(value, x => x.nil());
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
+
+  test.each([
+    [null, true],
+    [undefined, false],
+    ["A", false],
+    [1, false],
+    [0, false]
+  ])("null::%s", (value, valid) => {
+    const builder = that(value, x => x.null());
+    const result = run(builder);
+    expect(result.valid).toEqual(valid);
+  });
 });

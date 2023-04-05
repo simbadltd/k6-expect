@@ -25,7 +25,7 @@ export function describe<TContext extends TestSuiteContext = TestSuiteContext>(
     } catch (e) {
       success = false;
 
-      if (e instanceof BrokenTestSuiteError && !e.brokenChain) {
+      if (!(e instanceof BrokenTestSuiteError && e.brokenChain)) {
         console.error(`Exception  during test suite "${name}" run. \n${e}`);
         check(null, {
           [`Exception raised "${e}"`]: () => false
