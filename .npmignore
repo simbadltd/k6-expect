@@ -6,11 +6,14 @@ test/
 .idea/
 
 .eslintrc.json
+tsconfig.eslint.json
 tsconfig.json
+.prettierrc.json
+jest.config.js
 
 .vscode/
 .github/
 coverage/
 badges/
-.prettierrc.json
-jest.config.js
+
+*.map
